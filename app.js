@@ -1,4 +1,6 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
+const generatePage = require("./src/page-template.js");
 const promptUser = () => {
   return inquirer.prompt([
     {
@@ -131,12 +133,15 @@ const promptProject = (portfolioData) => {
 promptUser()
   .then(promptProject)
   .then((portfolioData) => {
-    console.log(portfolioData);
+    const pageHTML = generatePage(portfolioData);
+    // fs.writeFile('./index.html', pageHTML, err => {
+    //   if (err) throw new Error(err);
+    // console.log('Page created! Check out index.html in this directory to see it!');
+    // });
   });
-// const fs = require("fs");
+
 // const { generate } = require("rxjs");
 
-// const generatePage = require("./src/page-template.js");
 // const pageHTML = generatePage(name, github);
 
 // fs.writeFile("./index.html", generatePage(name, github), (err) => {
